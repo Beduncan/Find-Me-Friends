@@ -2,9 +2,9 @@
 <html>
 <head>
 	<title>Friend Finder Servey</title>
-	<script src="https://code.jquery.com/jquery.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="container">
@@ -136,38 +136,31 @@
       <option>5(Strongly Agree)</option>
     </select>
   </div>
-  <button type="submit" class="btn btn-primary mb-2" id="add-btn">Submit</button>            
+  <button type="submit" class="btn btn-primary mb-2" id="submit">Submit</button>            
 </form>
   <script type="text/javascript">
-    // Question: What does this code do?
-    $("#add-btn").on("click", function(event) {
+    $("#submit").on("click", function(event){
       event.preventDefault();
-      var scores = [        	
-      		parseFloat($('#Q1').val().trim()),
-        	parseFloat($('#Q2').val().trim()),
-        	parseFloat($('#Q3').val().trim()),
-        	parseFloat($('#Q4').val().trim()),
-        	parseFloat($('#Q5').val().trim()),
-        	parseFloat($('#Q6').val().trim()),
-        	parseFloat($('#Q7').val().trim()),
-        	parseFloat($('#Q8').val().trim()),
-        	parseFloat($('#Q9').val().trim()),
-        	parseFloat($('#Q10').val().trim()),
-        	parseFloat($('#Q11').val().trim()),]
       var newFriend = {
         name: $("#names").val().trim(),
-        image: $("#Image").val().trim(),
-        scores:scores,
-
-        //],		
-         
-      	
+        image: $("#Image").val(),
+        q1: parseFloat($('#Q1').val().trim()),
+        q2: parseFloat($('#Q2').val().trim()),
+        q3: parseFloat($('#Q3').val().trim()),
+        q4: parseFloat($('#Q4').val().trim()),
+        q5: parseFloat($('#Q5').val().trim()),
+        q6: parseFloat($('#Q6').val().trim()),
+        q7: parseFloat($('#Q7').val().trim()),
+        q8: parseFloat($('#Q8').val().trim()),
+        q9: parseFloat($('#Q9').val().trim()),
+      	q10: parseFloat($('#Q10').val().trim()),
+      	q11: parseFloat($('#Q11').val().trim()),		    
       };
-     
       $.post("/api/friends", newFriend)
       .then(function(data){
-      	console.log(data.Scores);
+        // console.log(data)
       })
+      	alert("yay!");
     });
   </script>
 </div>
