@@ -144,23 +144,32 @@
       var newFriend = {
         name: $("#names").val().trim(),
         image: $("#Image").val(),
-        q1: parseFloat($('#Q1').val().trim()),
-        q2: parseFloat($('#Q2').val().trim()),
-        q3: parseFloat($('#Q3').val().trim()),
-        q4: parseFloat($('#Q4').val().trim()),
-        q5: parseFloat($('#Q5').val().trim()),
-        q6: parseFloat($('#Q6').val().trim()),
-        q7: parseFloat($('#Q7').val().trim()),
-        q8: parseFloat($('#Q8').val().trim()),
-        q9: parseFloat($('#Q9').val().trim()),
-      	q10: parseFloat($('#Q10').val().trim()),
-      	q11: parseFloat($('#Q11').val().trim()),		    
+        scores :[
+         parseFloat($('#Q1').val().trim()),
+         parseFloat($('#Q2').val().trim()),
+         parseFloat($('#Q3').val().trim()),
+         parseFloat($('#Q4').val().trim()),
+         parseFloat($('#Q5').val().trim()),
+         parseFloat($('#Q6').val().trim()),
+         parseFloat($('#Q7').val().trim()),
+         parseFloat($('#Q8').val().trim()),
+         parseFloat($('#Q9').val().trim()),
+      	 parseFloat($('#Q10').val().trim()),
+      	 parseFloat($('#Q11').val().trim()),		    
+        ]
       };
+      console.log(newFriend);
+
+      var currentURL = window.location.origin;
+
       $.post("/api/friends", newFriend)
       .then(function(data){
-        // console.log(data)
+        console.log(data)
       })
       	alert("yay!");
+      $('#name').val("");
+      $('#image').val("");
+
     });
   </script>
 </div>
