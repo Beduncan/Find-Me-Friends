@@ -139,38 +139,47 @@
   <button type="submit" class="btn btn-primary mb-2" id="submit">Submit</button>            
 </form>
   <script type="text/javascript">
+    var isString = ("is-string");
     $("#submit").on("click", function(event){
       event.preventDefault();
-      var newFriend = {
-        name: $("#names").val().trim(),
-        image: $("#Image").val(),
-        scores :[
-         parseFloat($('#Q1').val().trim()),
-         parseFloat($('#Q2').val().trim()),
-         parseFloat($('#Q3').val().trim()),
-         parseFloat($('#Q4').val().trim()),
-         parseFloat($('#Q5').val().trim()),
-         parseFloat($('#Q6').val().trim()),
-         parseFloat($('#Q7').val().trim()),
-         parseFloat($('#Q8').val().trim()),
-         parseFloat($('#Q9').val().trim()),
-      	 parseFloat($('#Q10').val().trim()),
-      	 parseFloat($('#Q11').val().trim()),		    
-        ]
-      };
+      //if inputs are filled out  create new friend 
+      if( ($('#name').val().trim() !== "") && ($('#photo').val().trim() !== "") ) {
+        var newFriend = {
+          name: $("#names").val().trim()
+          image: $("#Image").val(),
+          scores :[
+           parseFloat($('#Q1').val().trim()),
+           parseFloat($('#Q2').val().trim()),
+           parseFloat($('#Q3').val().trim()),
+           parseFloat($('#Q4').val().trim()),
+           parseFloat($('#Q5').val().trim()),
+           parseFloat($('#Q6').val().trim()),
+           parseFloat($('#Q7').val().trim()),
+           parseFloat($('#Q8').val().trim()),
+           parseFloat($('#Q9').val().trim()),
+        	 parseFloat($('#Q10').val().trim()),
+        	 parseFloat($('#Q11').val().trim()),		    
+          ]
+        };
       console.log(newFriend);
-
       var currentURL = window.location.origin;
+        //ajax post
+        $.post("/api/friends", newFriend)
+        .then(function(data){
+          // console.log(data)
+          //grap res from post 
+          $("#matchName").text(data.name);
+          $('#matchImg').attr("src", data.img);
+          //show match image and name in div  
+        	 alert("yay!");
+        });
+      }else{
+        alert("fill in needed information");
+      }
+        $('#name').val("");
+        $('#image').val("");
+      });
 
-      $.post("/api/friends", newFriend)
-      .then(function(data){
-        console.log(data)
-      })
-      	alert("yay!");
-      $('#name').val("");
-      $('#image').val("");
-
-    });
   </script>
 </div>
 </body>
